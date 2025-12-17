@@ -15,7 +15,6 @@
   --accent:#ffd34d;
   --white:#e9f1fa;
   --glass:rgba(255,255,255,.035);
-  --radius:16px;
   --maxw:1200px;
 }
 
@@ -26,6 +25,7 @@ body{
   font-family:"Roboto",system-ui;
   background:linear-gradient(180deg,#051026,var(--bg) 60%);
   color:var(--white);
+  line-height:1.55;
 }
 
 .container{
@@ -80,13 +80,22 @@ nav a{
     linear-gradient(135deg,#0b1c2d,#071427);
 }
 
-/* WORK */
+/* LAYOUT */
+.layout{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:28px;
+}
+@media(max-width:1080px){ .layout{grid-template-columns:1fr} }
+
+/* CARD */
 .card{
   background:var(--panel);
   padding:22px;
   border-radius:16px;
 }
 
+/* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -118,9 +127,7 @@ nav a{
     linear-gradient(135deg,#0b1c2d,#081a2a);
   transition:transform .9s cubic-bezier(.2,.9,.2,1);
 }
-.project:hover .color-block{
-  transform:scale(1.05);
-}
+.project:hover .color-block{ transform:scale(1.05); }
 
 .project-info{
   position:absolute;
@@ -130,11 +137,27 @@ nav a{
   border-radius:12px;
   transition:transform .4s ease;
 }
-.project:hover .project-info{
-  transform:translateY(-4px);
-}
+.project:hover .project-info{ transform:translateY(-4px); }
 .project-info h3{margin:0;font-size:16px}
 .project-info p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:32px}
+.meta{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);
+  padding:16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.04);
+}
+.badge{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  background:var(--glass);
+  color:var(--muted);
+  font-size:13px;
+  margin:4px 4px 0 0;
+}
 
 /* MODAL */
 .modal-wrap{
@@ -150,7 +173,7 @@ nav a{
   background:linear-gradient(180deg,#071427,#081a2a);
   padding:24px;
   border-radius:16px;
-  max-width:640px;
+  max-width:720px;
   width:100%;
   transform:translateY(20px) scale(.98);
   opacity:0;
@@ -160,9 +183,7 @@ nav a{
   transform:none;
   opacity:1;
 }
-
 .modal-color{
-  width:100%;
   height:260px;
   border-radius:12px;
   margin-bottom:16px;
@@ -172,24 +193,8 @@ nav a{
     linear-gradient(135deg,#0b1c2d,#071427);
 }
 
-.badge{
-  display:inline-block;
-  padding:8px 12px;
-  border-radius:999px;
-  background:var(--glass);
-  color:var(--muted);
-  font-size:13px;
-  margin-right:8px;
-}
-
-.btn{
-  padding:10px 16px;
-  border-radius:12px;
-  background:transparent;
-  border:1px solid rgba(255,255,255,.08);
-  color:var(--white);
-  cursor:pointer;
-}
+/* FOOTER */
+footer{color:var(--muted);font-size:13px}
 </style>
 </head>
 
@@ -201,59 +206,91 @@ nav a{
     <div class="logo">AF</div>
     <div>
       <strong>Aldy Febrian</strong><br>
-      <span style="color:var(--muted);font-size:13px">Creative Digital Strategist</span>
+      <span style="color:var(--muted);font-size:13px">
+        Creative Digital Strategist — Strategy • Motion • Data
+      </span>
     </div>
   </div>
   <nav>
     <a href="#work">Work</a>
+    <a href="#services">Services</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <section class="hero">
   <div>
-    <div class="eyebrow">Strategy · Motion · Data</div>
-    <h1 class="hero-title">I turn strategy into clear visual stories.</h1>
+    <div class="eyebrow">Strategy · Content · Motion · Data</div>
+    <h1 class="hero-title">
+      I turn reports and strategy into clear visual stories.
+    </h1>
     <p class="hero-desc">
-      Designing content systems and motion-first assets for public institutions and brands.
+      I design content systems, direct shoots, and produce motion-first assets
+      for public institutions, corporates, and thought leaders.
     </p>
   </div>
   <div class="hero-media"></div>
 </section>
 
+<div class="layout">
+
+<main>
 <section id="work" class="card">
-  <h2>Selected Work</h2>
-  <div class="gallery">
+<h2>Selected Work</h2>
 
-    <div class="project" data-key="jds">
-      <div class="color-block"></div>
-      <div class="project-info">
-        <h3>Jabar Digital Service</h3>
-        <p>Content system & performance</p>
-      </div>
-    </div>
-
-    <div class="project" data-key="distan">
-      <div class="color-block"></div>
-      <div class="project-info">
-        <h3>Distanhorti Jabar</h3>
-        <p>3-month campaign</p>
-      </div>
-    </div>
-
-    <div class="project" data-key="biteship">
-      <div class="color-block"></div>
-      <div class="project-info">
-        <h3>Biteship</h3>
-        <p>Marketing video</p>
-      </div>
-    </div>
-
-  </div>
+<div class="gallery">
+<!-- 6 PROJECTS -->
+<div class="project" data-key="jds"><div class="color-block"></div><div class="project-info"><h3>Jabar Digital Service</h3><p>Performance transformation</p></div></div>
+<div class="project" data-key="distan"><div class="color-block"></div><div class="project-info"><h3>Distanhorti Jabar</h3><p>3-month campaign</p></div></div>
+<div class="project" data-key="biteship"><div class="color-block"></div><div class="project-info"><h3>Biteship</h3><p>Marketing video</p></div></div>
+<div class="project" data-key="motion"><div class="color-block"></div><div class="project-info"><h3>Motion Portfolio</h3><p>Explainers & reels</p></div></div>
+<div class="project" data-key="reformist"><div class="color-block"></div><div class="project-info"><h3>The Reformist</h3><p>Podcast editing</p></div></div>
+<div class="project" data-key="wamen"><div class="color-block"></div><div class="project-info"><h3>Arrmanatha Nasir</h3><p>Editorial system</p></div></div>
+</div>
 </section>
 
+<section id="services" class="card" style="margin-top:22px">
+<h2>Services</h2>
+<p style="color:var(--muted)">
+End-to-end production — from deck → script → storyboard → motion → reporting.
+</p>
+<div>
+<span class="badge">Strategy & Pillars</span>
+<span class="badge">Script & Storyboard</span>
+<span class="badge">Production</span>
+<span class="badge">Motion Design</span>
+<span class="badge">Short-form Content</span>
+<span class="badge">Reporting & Ads</span>
+</div>
+</section>
+
+<section class="card" style="margin-top:22px">
+<h2>Concept → Video</h2>
+<p style="color:var(--muted)">
+I turn reports and decks into short explainers and social-first clips.
+Handling translation, scripting, storyboard, edit, and final delivery.
+</p>
+</section>
+</main>
+
+<aside class="sidebar">
+<div class="meta">
+<h4>Quick Bio</h4>
+<p style="color:var(--muted)">
+Creative Digital Strategist & motion producer bridging strategy,
+visual storytelling, and data.
+</p>
+<p style="color:var(--muted)">
+<strong>Email</strong><br>
+aldynurfebrian@gmail.com
+</p>
+</div>
+</aside>
+
+</div>
+
 <footer id="contact">
-  <p style="color:var(--muted)">Email: aldynurfebrian@gmail.com</p>
+© Aldy Febrian — Portfolio
 </footer>
 
 </div>
@@ -264,53 +301,32 @@ nav a{
     <div class="modal-color"></div>
     <h3 id="modalTitle"></h3>
     <p id="modalDesc" style="color:var(--muted)"></p>
-    <div id="modalMetrics" style="margin:14px 0"></div>
-    <button class="btn" onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <script>
-const DATA = {
-  jds:{
-    title:"Jabar Digital Service",
-    desc:"Led content strategy, reporting, and motion-first editorial system.",
-    metrics:["Reach 3.2M","Followers +36K","Engagement 357K"]
-  },
-  distan:{
-    title:"Distanhorti Jabar",
-    desc:"Educational campaign with reporting and optimization.",
-    metrics:["Reach 142K","Interactions 20K"]
-  },
-  biteship:{
-    title:"Biteship",
-    desc:"Marketing video — concept, storyboard, and production.",
-    metrics:["60s & 30s cuts","30 photos delivered"]
-  }
+const DATA={
+jds:{title:"Jabar Digital Service",desc:"Content strategy, motion system, and performance reporting."},
+distan:{title:"Distanhorti Jabar",desc:"Educational campaign with optimization & reporting."},
+biteship:{title:"Biteship",desc:"Marketing video: concept, storyboard, and production."},
+motion:{title:"Motion Portfolio",desc:"Explainers and motion graphics."},
+reformist:{title:"The Reformist",desc:"Podcast editing & short-form clips."},
+wamen:{title:"Arrmanatha Nasir",desc:"Editorial system & content calendar."}
 };
 
-document.querySelectorAll('.project').forEach(p=>{
-  p.onclick = ()=>openModal(p.dataset.key);
+document.querySelectorAll(".project").forEach(p=>{
+p.onclick=()=>openModal(p.dataset.key);
 });
 
-function openModal(key){
-  const d = DATA[key];
-  if(!d) return;
-  modalTitle.textContent = d.title;
-  modalDesc.textContent = d.desc;
-  modalMetrics.innerHTML="";
-  d.metrics.forEach(m=>{
-    const b=document.createElement("span");
-    b.className="badge";
-    b.textContent=m;
-    modalMetrics.appendChild(b);
-  });
-  modalWrap.style.display="flex";
-  requestAnimationFrame(()=>modalWrap.classList.add("show"));
+function openModal(k){
+modalTitle.textContent=DATA[k].title;
+modalDesc.textContent=DATA[k].desc;
+modalWrap.style.display="flex";
+requestAnimationFrame(()=>modalWrap.classList.add("show"));
 }
-
 function closeModal(){
-  modalWrap.classList.remove("show");
-  setTimeout(()=>modalWrap.style.display="none",300);
+modalWrap.classList.remove("show");
+setTimeout(()=>modalWrap.style.display="none",300);
 }
 </script>
 
