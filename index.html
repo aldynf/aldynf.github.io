@@ -1,353 +1,997 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Aldy Febrian — Portfolio</title>
-<meta name="description" content="Portfolio of Aldy Febrian — Creative Digital Strategist. Image-first, clean & professional.">
-
-<!-- Roboto for a tech-savvy, clean look -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-<!-- NOTES:
- - Put high-quality images in assets/ as before.
- - Filenames used in the script must match files in /assets.
- - Open with python3 -m http.server or double-click index.html.
--->
-
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Aldy Febrian — Creative Strategist</title>
+<meta name="description" content="Aldy Febrian — I translate complex things into stories people can feel and understand. Strategy, motion, storytelling."/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#071427;
-    --panel:#0b1522;
-    --muted:#9fb0c8;
-    --accent:#ffd34d;
-    --glass: rgba(255,255,255,0.035);
-    --white: #e9f1fa;
-    --radius:14px;
-    --maxw:1200px;
-    --gap:28px;
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --ink:       #0d1117;
+  --ink-soft:  #3a3f4a;
+  --ink-muted: #7a8194;
+  --paper:     #f7f4ef;
+  --paper-alt: #edeae4;
+  --accent:    #c8541a;        /* warm burnt orange */
+  --accent-lt: #f0ede7;
+  --navy:      #0e1f3d;
+  --white:     #ffffff;
 
-    /* typography scale */
-    --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial;
-    --h1: 36px;
-    --h2: 22px;
-    --h3: 16px;
-    --lead: 16px;
-    --body: 15px;
-  }
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
 
-  /* Reset + base */
-  *{box-sizing:border-box}
-  html{font-size:16px;scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:var(--font-sans);
-    background: linear-gradient(180deg,#051026 0%, var(--bg) 60%);
-    color:var(--white);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.55;
-  }
-  a{color:var(--accent);text-decoration:none}
-  a:focus{outline:2px solid rgba(255,211,77,0.18);outline-offset:3px;border-radius:6px}
+  --maxw: 1160px;
+  --radius: 14px;
 
-  /* Layout */
-  .container{max-width:var(--maxw);margin:40px auto;padding:32px;display:grid;gap:var(--gap)}
-  header{display:flex;align-items:center;justify-content:space-between;gap:20px}
-  .brand{display:flex;gap:18px;align-items:center}
-  .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffb366);display:flex;align-items:center;justify-content:center;color:#071227;font-weight:900;font-size:20px;box-shadow:0 12px 40px rgba(4,8,14,0.6)}
-  .brand h1{margin:0;font-size:18px;font-weight:700;letter-spacing:0.2px}
-  .brand p{margin:0;color:var(--muted);font-size:13px}
+  /* spacing scale */
+  --s1:  6px;
+  --s2: 12px;
+  --s3: 20px;
+  --s4: 32px;
+  --s5: 52px;
+  --s6: 88px;
+}
 
-  nav{display:flex;gap:18px;align-items:center}
-  nav a{color:var(--muted);font-weight:600;font-size:14px;padding:6px 10px;border-radius:8px}
-  nav a:hover{color:var(--white);background:rgba(255,255,255,0.02)}
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:var(--accent);text-decoration:none}
+img{display:block;max-width:100%}
 
-  /* HERO */
-  .hero{
-    display:grid;
-    grid-template-columns: 1fr 520px;
-    gap:28px;
-    align-items:center;
-    padding:34px;
-    border-radius:18px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
-    box-shadow: 0 30px 70px rgba(3,7,16,0.6);
-    overflow:hidden;
-  }
-  @media (max-width:980px){ .hero{ grid-template-columns:1fr; padding:22px } }
-  .eyebrow{color:var(--accent);font-weight:800;font-size:13px;letter-spacing:0.6px}
-  .hero-title{font-size:var(--h1);margin:8px 0 0;font-weight:900;line-height:1.02}
-  .hero-desc{color:var(--muted);font-size:var(--lead);margin-top:12px;max-width:60ch}
-  .hero-ctas{display:flex;gap:12px;margin-top:20px}
-  .btn{padding:11px 16px;border-radius:12px;background:var(--accent);color:#071227;font-weight:800;border:none;cursor:pointer;font-size:14px}
-  .btn.ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.04)}
+/* ============================================================
+   CURSOR — subtle branded dot
+   ============================================================ */
+body{cursor:none}
+#cursor{
+  position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  transition:transform .12s ease,width .2s,height .2s,opacity .2s;
+}
+#cursor.grow{width:38px;height:38px;opacity:.18}
 
-  .hero-media{position:relative;border-radius:12px;overflow:hidden;min-height:360px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
-  .hero-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.9,.2,1)}
-  .hero-media:hover img{transform:scale(1.03)}
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+.display{font-family:var(--serif);font-size:clamp(44px,6vw,84px);line-height:1.01;letter-spacing:-0.01em;color:var(--ink)}
+.display em{color:var(--accent);font-style:italic}
+.h2{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);line-height:1.08;letter-spacing:-0.01em}
+.h3{font-family:var(--serif);font-size:clamp(20px,2vw,26px);line-height:1.2}
+.label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.lead{font-size:clamp(16px,1.4vw,19px);line-height:1.68;color:var(--ink-soft)}
+.body{font-size:15px;line-height:1.7;color:var(--ink-soft)}
 
-  /* Grid layout */
-  .layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
-  @media (max-width:1080px){ .layout{grid-template-columns:1fr} }
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s4)}
 
-  /* Cards */
-  section.card{background:var(--panel);padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.02)}
-  h2.section-title{margin:0 0 8px;font-size:var(--h2);font-weight:700}
-  p.lead{color:var(--muted);margin:0 0 12px;font-size:var(--lead)}
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px var(--s4);
+  transition:background .3s,backdrop-filter .3s;
+}
+nav.scrolled{background:rgba(247,244,239,.88);backdrop-filter:blur(12px)}
+.nav-brand{font-family:var(--serif);font-size:22px;color:var(--ink);display:flex;align-items:center;gap:10px}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.nav-links{display:flex;gap:var(--s4);align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{
+  padding:9px 18px;border-radius:99px;background:var(--ink);color:var(--white)!important;
+  font-size:13px!important;font-weight:600!important;
+}
+.nav-cta:hover{background:var(--accent)!important;color:var(--white)!important}
 
-  /* Gallery */
-  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:1080px){ .gallery{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:640px){ .gallery{grid-template-columns:1fr} }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;display:grid;align-items:center;
+  padding:120px var(--s4) var(--s6);
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:var(--s5);
+  align-items:center;
+  max-width:var(--maxw);
+  margin:0 auto;
+  width:100%;
+}
+.hero-eyebrow{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s3)}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--accent)}
+.hero-title{margin-bottom:var(--s3)}
+.hero-desc{max-width:52ch;margin-bottom:var(--s4)}
+.hero-ctas{display:flex;gap:var(--s2);flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 24px;border-radius:99px;
+  background:var(--accent);color:var(--white);font-weight:600;font-size:14px;
+  transition:background .2s,transform .15s;
+}
+.btn-primary:hover{background:#a8401199;transform:translateY(-1px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 24px;border-radius:99px;
+  border:1px solid rgba(13,17,23,.15);color:var(--ink);font-weight:500;font-size:14px;
+  transition:border-color .2s,transform .15s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 
-  .project{
-    position:relative;border-radius:12px;overflow:hidden;min-height:260px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);cursor:pointer;border:1px solid rgba(255,255,255,0.03);
-    transform:translateY(12px);opacity:0;transition:transform .6s cubic-bezier(.2,.9,.2,1),opacity .5s;
-  }
-  .project.visible{transform:none;opacity:1}
-  .project img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
-  .project:hover img{transform:scale(1.06)}
-  .project-info{position:absolute;left:16px;bottom:16px;background:linear-gradient(90deg, rgba(6,10,20,0.6), transparent);padding:14px;border-radius:10px;backdrop-filter: blur(4px)}
-  .project-info h3{margin:0;font-size:16px;font-weight:700}
-  .project-info p{margin:6px 0 0;color:var(--muted);font-size:13px}
+/* hero photo */
+.hero-photo-wrap{position:relative}
+.hero-photo{
+  width:100%;aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;
+  background:var(--paper-alt);
+  box-shadow:0 32px 64px rgba(13,17,23,.12);
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:80px;color:var(--paper);
+  background:linear-gradient(145deg,var(--navy),#1a3560);
+}
+.hero-badge{
+  position:absolute;bottom:-16px;left:-16px;
+  background:var(--white);border-radius:12px;padding:14px 18px;
+  box-shadow:0 12px 32px rgba(13,17,23,.1);
+  display:flex;align-items:center;gap:10px;
+}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0}
+.hero-badge-text{font-size:12px;font-weight:600;color:var(--ink-soft)}
 
-  /* sidebar */
-  .sidebar{position:sticky;top:32px;height:max-content}
-  .meta-box{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-  .meta-box h4{margin:0;font-size:14px}
-  .badge{display:inline-block;padding:8px 12px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:700;margin-right:8px;font-size:13px}
+/* hero bg decoration */
+.hero-bg-ring{
+  position:absolute;right:-200px;top:-200px;width:700px;height:700px;
+  border-radius:50%;border:1px solid rgba(200,84,26,.08);pointer-events:none;
+}
+.hero-bg-ring-2{
+  position:absolute;right:-100px;top:-100px;width:450px;height:450px;
+  border-radius:50%;border:1px solid rgba(200,84,26,.06);pointer-events:none;
+}
 
-  /* modal */
-  .modal-wrap{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.65);z-index:90;padding:20px}
-  .modal{width:100%;max-width:1080px;background:linear-gradient(180deg,#071427,#081a2a);border-radius:12px;padding:20px;transform:translateY(26px) scale(.98);opacity:0;transition:all .45s cubic-bezier(.2,.9,.2,1);box-shadow: 0 40px 120px rgba(2,6,23,0.7)}
-  .modal.open{transform:none;opacity:1}
-  .modal-grid{display:grid;grid-template-columns:1fr 360px;gap:16px}
-  @media(max-width:980px){ .modal-grid{grid-template-columns:1fr} }
-  .modal-media{border-radius:10px;overflow:hidden;min-height:380px;background:#02101a;display:flex;align-items:center;justify-content:center}
-  .modal-media img{max-width:100%;max-height:70vh;object-fit:contain}
-  .thumbs{display:flex;gap:10px;margin-top:12px;overflow:auto;padding-bottom:6px}
-  .thumbs img{width:94px;height:66px;object-fit:cover;border-radius:8px;opacity:.9;cursor:pointer;border:2px solid transparent}
-  .thumbs img.active{border-color:var(--accent);opacity:1}
+/* hero stats */
+.hero-stats{
+  display:flex;gap:var(--s4);margin-top:var(--s4);padding-top:var(--s4);
+  border-top:1px solid rgba(13,17,23,.08);
+}
+.hero-stat-num{font-family:var(--serif);font-size:28px;color:var(--ink);line-height:1}
+.hero-stat-label{font-size:12px;color:var(--ink-muted);margin-top:4px}
 
-  .metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-  .metric{background:var(--glass);padding:10px;border-radius:10px;min-width:120px}
-  .metric strong{display:block;color:var(--accent);font-size:18px}
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.section-divider{
+  height:1px;background:rgba(13,17,23,.08);
+  max-width:var(--maxw);margin:0 auto;
+}
 
-  /* footer */
-  footer{display:flex;justify-content:space-between;align-items:center;margin-top:36px;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:12px}
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about{padding:var(--s6) var(--s4)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--s6);align-items:start;
+  max-width:var(--maxw);margin:0 auto;
+}
+.about-statement{
+  font-family:var(--serif);
+  font-size:clamp(22px,2.5vw,32px);
+  line-height:1.35;
+  color:var(--ink);
+  max-width:28ch;
+}
+.about-statement em{color:var(--accent);font-style:italic}
+.about-right{padding-top:var(--s2)}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+.tag{
+  padding:6px 14px;border-radius:99px;
+  background:var(--paper-alt);color:var(--ink-soft);
+  font-size:12px;font-weight:500;
+}
 
-  /* animations: reveal */
-  .reveal-up{transform:translateY(20px);opacity:0;transition:all .7s cubic-bezier(.2,.9,.2,1)}
-  .reveal-up.show{transform:none;opacity:1}
+/* ============================================================
+   WORK
+   ============================================================ */
+.work{padding:var(--s6) var(--s4);background:var(--ink)}
+.work-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  max-width:var(--maxw);margin:0 auto var(--s5);
+}
+.work-header .h2{color:var(--white)}
+.work-header .label{color:rgba(255,255,255,.4)}
+.work-see-all{font-size:13px;color:rgba(255,255,255,.5);font-weight:500}
+.work-see-all:hover{color:var(--accent)}
+
+/* project grid */
+.project-grid{
+  max-width:var(--maxw);margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+}
+.project-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  background:rgba(255,255,255,.03);
+  aspect-ratio:4/5;
+}
+.project-card.wide{grid-column:span 2;aspect-ratio:16/9}
+.project-card-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.9,.2,1);
+}
+.project-card-img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(255,255,255,.08));
+  font-family:var(--serif);font-size:clamp(24px,3vw,40px);color:rgba(255,255,255,.12);
+  text-align:center;padding:var(--s4);
+}
+.project-card:hover .project-card-img,
+.project-card:hover .project-card-img-placeholder{transform:scale(1.04)}
+.project-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(13,17,23,.85) 0%,transparent 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:var(--s3);opacity:1;
+  transition:background .3s;
+}
+.project-card:hover .project-card-overlay{background:linear-gradient(0deg,rgba(13,17,23,.92) 0%,rgba(13,17,23,.2) 100%)}
+.project-card-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.project-card-title{font-family:var(--serif);font-size:clamp(16px,1.8vw,22px);color:var(--white);line-height:1.2}
+.project-card-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px}
+.project-card-metrics{
+  display:flex;gap:8px;margin-top:var(--s2);
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,margin-top .35s ease;
+}
+.project-card:hover .project-card-metrics{max-height:60px}
+.project-metric{
+  padding:5px 10px;border-radius:99px;
+  background:rgba(255,255,255,.08);backdrop-filter:blur(4px);
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.8);
+  white-space:nowrap;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(13,17,23,.7);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:var(--s4);
+}
+.modal-overlay.open{display:flex}
+.modal{
+  width:100%;max-width:1000px;max-height:90vh;overflow-y:auto;
+  background:var(--white);border-radius:20px;
+  transform:translateY(24px);opacity:0;
+  transition:transform .4s cubic-bezier(.2,.9,.2,1),opacity .3s;
+}
+.modal-overlay.open .modal{transform:none;opacity:1}
+.modal-inner{display:grid;grid-template-columns:1fr 340px}
+.modal-media{
+  border-radius:20px 0 0 20px;overflow:hidden;
+  background:var(--paper-alt);min-height:400px;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-media img{width:100%;height:100%;object-fit:cover}
+.modal-media-placeholder{
+  width:100%;height:100%;min-height:400px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:60px;color:var(--paper-alt);
+  background:linear-gradient(145deg,var(--navy),#1e3d6e);
+}
+.modal-content{padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3)}
+.modal-close{
+  align-self:flex-end;width:36px;height:36px;border-radius:50%;
+  background:var(--paper-alt);border:none;cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;color:var(--ink-soft);
+  transition:background .2s;
+}
+.modal-close:hover{background:var(--paper)}
+.modal-title{font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--ink)}
+.modal-sub{font-size:13px;color:var(--ink-muted);font-weight:500}
+.modal-desc{font-size:14px;line-height:1.7;color:var(--ink-soft)}
+.modal-metrics{display:flex;flex-wrap:wrap;gap:8px}
+.modal-metric{
+  padding:8px 14px;border-radius:10px;
+  background:var(--paper-alt);
+}
+.modal-metric strong{display:block;font-family:var(--serif);font-size:20px;color:var(--accent)}
+.modal-metric span{font-size:11px;color:var(--ink-muted)}
+.modal-links{display:flex;flex-direction:column;gap:6px}
+.modal-link{
+  font-size:13px;font-weight:600;color:var(--accent);
+  display:flex;align-items:center;gap:6px;
+}
+.modal-link::before{content:"↗";font-size:11px}
+.modal-thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.modal-thumb{
+  width:72px;height:52px;border-radius:8px;overflow:hidden;flex-shrink:0;
+  border:2px solid transparent;cursor:pointer;transition:border-color .2s;
+}
+.modal-thumb.active{border-color:var(--accent)}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services{padding:var(--s6) var(--s4);background:var(--paper-alt)}
+.services-inner{max-width:var(--maxw);margin:0 auto}
+.services-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--s5)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.service-card{
+  background:var(--white);border-radius:var(--radius);padding:var(--s4);
+  border:1px solid rgba(13,17,23,.06);
+  transition:transform .2s,box-shadow .2s;
+}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(13,17,23,.08)}
+.service-icon{width:44px;height:44px;border-radius:10px;background:var(--accent-lt);
+  display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--s3)}
+.service-title{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:var(--s2)}
+.service-desc{font-size:13px;line-height:1.65;color:var(--ink-soft)}
+.service-list{list-style:none;margin-top:var(--s2);display:flex;flex-direction:column;gap:4px}
+.service-list li{font-size:12px;color:var(--ink-muted);padding-left:14px;position:relative}
+.service-list li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process{padding:var(--s6) var(--s4)}
+.process-inner{max-width:var(--maxw);margin:0 auto}
+.process-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  margin-top:var(--s5);position:relative;
+}
+.process-steps::before{
+  content:"";position:absolute;top:22px;left:10%;right:10%;
+  height:1px;background:rgba(13,17,23,.1);
+}
+.process-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 var(--s2)}
+.process-step-num{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--white);border:1px solid rgba(13,17,23,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:18px;color:var(--accent);
+  margin-bottom:var(--s3);position:relative;z-index:1;
+  box-shadow:0 4px 12px rgba(13,17,23,.06);
+}
+.process-step-title{font-weight:600;font-size:13px;color:var(--ink);margin-bottom:4px}
+.process-step-desc{font-size:11px;color:var(--ink-muted);line-height:1.5}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{
+  padding:var(--s6) var(--s4);
+  background:var(--navy);
+  position:relative;overflow:hidden;
+}
+.contact::before{
+  content:"";position:absolute;
+  right:-200px;bottom:-200px;width:600px;height:600px;
+  border-radius:50%;border:1px solid rgba(200,84,26,.12);
+}
+.contact-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:center}
+.contact-title{font-family:var(--serif);font-size:clamp(32px,4vw,56px);line-height:1.05;color:var(--white);margin-bottom:var(--s3)}
+.contact-title em{color:var(--accent);font-style:italic}
+.contact-desc{font-size:15px;line-height:1.7;color:rgba(255,255,255,.55);margin-bottom:var(--s4)}
+.contact-links{display:flex;flex-direction:column;gap:var(--s2)}
+.contact-link{
+  display:flex;align-items:center;gap:var(--s2);padding:14px 18px;
+  border-radius:var(--radius);background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  transition:background .2s,border-color .2s;
+}
+.contact-link:hover{background:rgba(255,255,255,.08);border-color:rgba(200,84,26,.3)}
+.contact-link-icon{font-size:18px}
+.contact-link-info{}
+.contact-link-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.contact-link-value{font-size:14px;font-weight:500;color:var(--white)}
+
+.contact-right{display:flex;flex-direction:column;gap:var(--s3)}
+.contact-fact{
+  padding:var(--s3) var(--s4);border-radius:var(--radius);
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+}
+.contact-fact-num{font-family:var(--serif);font-size:36px;color:var(--accent);line-height:1}
+.contact-fact-label{font-size:13px;color:rgba(255,255,255,.45);margin-top:4px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:var(--s4) var(--s4);
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:var(--s2);
+}
+.footer-brand{font-family:var(--serif);font-size:16px;color:rgba(255,255,255,.4)}
+.footer-note{font-size:12px;color:rgba(255,255,255,.2)}
+
+/* ============================================================
+   REVEAL ANIMATIONS
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo-wrap{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .project-grid{grid-template-columns:1fr 1fr}
+  .project-card.wide{grid-column:span 2}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:var(--s3)}
+  .process-steps::before{display:none}
+  .contact-inner{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .project-grid{grid-template-columns:1fr}
+  .project-card.wide{grid-column:span 1;aspect-ratio:4/3}
+  .services-grid{grid-template-columns:1fr}
+  .nav-links{gap:var(--s3)}
+  .modal-inner{grid-template-columns:1fr}
+  .modal-media{border-radius:20px 20px 0 0;min-height:240px}
+}
 </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true">AF</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <span class="nav-dot"></span>
+    Aldy Febrian
+  </div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg-ring"></div>
+  <div class="hero-bg-ring-2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow reveal">
+        <span class="hero-eyebrow-line"></span>
+        <span class="label">Creative Strategist · Motion · Storytelling</span>
+      </div>
+      <h1 class="display hero-title reveal reveal-delay-1">
+        I translate<br><em>complex things</em><br>into stories<br>people feel.
+      </h1>
+      <p class="lead hero-desc reveal reveal-delay-2">
+        From government data portals to diplomatic accounts — I take what's hard to explain and make it impossible to ignore. Strategy first. Story always.
+      </p>
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#work" class="btn-primary">See my work ↓</a>
+        <a href="#contact" class="btn-ghost">Let's talk</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
         <div>
-          <h1>Aldy Febrian</h1>
-          <p class="small" style="color:var(--muted)">Creative Digital Strategist — Strategy • Motion • Data</p>
+          <div class="hero-stat-num">3.2M</div>
+          <div class="hero-stat-label">Peak reach (JDS 2024)</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">12+</div>
+          <div class="hero-stat-label">Years in creative work</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">150+</div>
+          <div class="hero-stat-label">Content pieces delivered</div>
         </div>
       </div>
+    </div>
+    <div class="hero-photo-wrap reveal reveal-delay-2">
+      <div class="hero-photo">
+        <!-- Replace src with your actual photo: assets/hero.jpg -->
+        <div class="hero-photo-placeholder">AF</div>
+      </div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span class="hero-badge-text">Open for projects</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <nav aria-label="Main navigation">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<div class="section-divider"></div>
 
-    <!-- HERO -->
-    <section class="hero" aria-label="Hero">
-      <div class="hero-copy">
-        <div class="eyebrow">Strategy · Content · Motion · Data</div>
-        <h2 class="hero-title">I turn reports and strategy into clear visual stories — storyboard to final edit.</h2>
-        <p class="hero-desc">I design content systems, direct shoots, and produce motion-first assets for public institutions, corporates and thought leaders. Practical, measurable, and crafted with care.</p>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="label" style="margin-bottom:var(--s3)">About</div>
+      <p class="about-statement">
+        I'm the person behind the scene — <em>designing the system,</em> shaping the story, and making sure every piece lands.
+      </p>
+    </div>
+    <div class="about-right reveal reveal-delay-1">
+      <p class="body">
+        With a background in broadcast design, motion graphics, and public-sector communication, I've spent over a decade learning how to make complex ideas feel simple. Not dumbed down — just clear.
+      </p>
+      <p class="body" style="margin-top:var(--s2)">
+        I've worked across government agencies, tech startups, media brands, and diplomatic accounts. Each taught me something different about how people receive information — and how to meet them where they are.
+      </p>
+      <p class="body" style="margin-top:var(--s2)">
+        My work lives at the intersection of strategy and craft: I think in systems, but I care about every detail — down to the sound mix on a 60-second reel.
+      </p>
+      <div class="about-tags" style="margin-top:var(--s3)">
+        <span class="tag">Content Strategy</span>
+        <span class="tag">Motion Design</span>
+        <span class="tag">Creative Direction</span>
+        <span class="tag">Storytelling</span>
+        <span class="tag">Data-driven Campaigns</span>
+        <span class="tag">Editorial Systems</span>
+        <span class="tag">Video Production</span>
+        <span class="tag">Meta & Google Ads</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="hero-ctas">
-          <a class="btn" href="#work">See case studies</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
-        </div>
+<div class="section-divider"></div>
 
-        <div style="margin-top:18px;color:var(--muted);font-size:14px">
-          Managed @jabardigitalservice until Apr 2025 · 150+ content pieces · Motion portfolio on YouTube
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-header">
+    <div>
+      <div class="label" style="color:rgba(255,255,255,.35);margin-bottom:var(--s2)">Selected work</div>
+      <h2 class="h2" style="color:var(--white)">Projects that matter.</h2>
+    </div>
+  </div>
+  <div class="project-grid" id="projectGrid">
+
+    <!-- JDS — wide card -->
+    <div class="project-card wide" data-key="jds" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Jabar Digital Service</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Content Strategy · 2022–2025</div>
+        <div class="project-card-title">Jabar Digital Service — Performance Transformation</div>
+        <div class="project-card-sub">Strategic lead & creative direction for West Java's digital agency</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">3.2M reach</span>
+          <span class="project-metric">+36K followers</span>
+          <span class="project-metric">357K engagement</span>
         </div>
       </div>
+    </div>
 
-      <div class="hero-media" aria-hidden="true">
-        <img src="assets/hero-large.jpg" alt="Hero image — Aldy Febrian" loading="lazy">
+    <!-- Distanhorti -->
+    <div class="project-card" data-key="distan" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Distanhorti</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Campaign · 2025</div>
+        <div class="project-card-title">Distanhorti Jabar — 3-Month Campaign</div>
+        <div class="project-card-sub">142K reach · 4× interaction target</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">142K reach</span>
+          <span class="project-metric">20K interactions</span>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- main layout -->
-    <div class="layout" style="margin-top:28px">
+    <!-- Biteship -->
+    <div class="project-card" data-key="biteship" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Biteship</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Video Production · 2022</div>
+        <div class="project-card-title">Biteship — Marketing Video</div>
+        <div class="project-card-sub">Creative Director · 22-page storyboard · full production</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">60s + 30s</span>
+          <span class="project-metric">30 photos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSW -->
+    <div class="project-card" data-key="dsw" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">DSW × Telkomsel</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Campaign · 2023</div>
+        <div class="project-card-title">Data Science Weekend × Telkomsel</div>
+        <div class="project-card-sub">Multi-channel national campaign</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">1,857 registrants</span>
+          <span class="project-metric">1.4M ads reach</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wamenlu — wide -->
+    <div class="project-card wide" data-key="wamen" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Wamenlu RI</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Strategic Proposal · 2025</div>
+        <div class="project-card-title">Arrmanatha Nasir — Deputy Foreign Minister of Indonesia</div>
+        <div class="project-card-sub">Lead Strategist · editorial system · diplomatic content framework</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">4-month calendar</span>
+          <span class="project-metric">15+ content briefs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mott MacDonald -->
+    <div class="project-card" data-key="mott" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Mott MacDonald</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Motion · Documentary · 2021 & 2023</div>
+        <div class="project-card-title">Mott MacDonald — Future Cities</div>
+        <div class="project-card-sub">Documentary video translating urban policy research</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">End-to-end</span>
+          <span class="project-metric">UK-funded</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSI -->
+    <div class="project-card" data-key="dsi" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">DSI Kompub</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Leadership · 2022–2023</div>
+        <div class="project-card-title">Data Science Indonesia — Kompub Lead</div>
+        <div class="project-card-sub">Led 10+ members · built editorial SOP · +10K followers</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">+10K followers</span>
+          <span class="project-metric">10+ team</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motion Portfolio -->
+    <div class="project-card" data-key="motion" tabindex="0" role="button">
+      <div class="project-card-img-placeholder">Motion Portfolio</div>
+      <div class="project-card-overlay">
+        <div class="project-card-label">Motion Design · 2019–2025</div>
+        <div class="project-card-title">Motion Portfolio — Explainers & Graphics</div>
+        <div class="project-card-sub">1–3M views · 200+ assets delivered</div>
+        <div class="project-card-metrics">
+          <span class="project-metric">1–3M views</span>
+          <span class="project-metric">200+ assets</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
       <div>
-        <section id="work" class="card reveal-up">
-          <h2 class="section-title">Selected Work</h2>
-          <p class="lead">Image-forward case studies — click to open project details with images and metrics.</p>
-
-          <div class="gallery" id="gallery">
-            <div class="project" data-key="jds" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/jds-thumb.jpg" alt="Jabar Digital Service">
-              <div class="project-info"><h3>Jabar Digital Service</h3><p class="small" style="color:var(--muted)">Performance transformation — reach 3.2M (Q3)</p></div>
-            </div>
-
-            <div class="project" data-key="distan" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/distan-thumb.jpg" alt="Distanhorti">
-              <div class="project-info"><h3>Distanhorti Jabar</h3><p class="small" style="color:var(--muted)">3-month campaign — 142.8K reach</p></div>
-            </div>
-
-            <div class="project" data-key="biteship" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/biteship-thumb.jpg" alt="Biteship">
-              <div class="project-info"><h3>Biteship</h3><p class="small" style="color:var(--muted)">Marketing video — concept & production</p></div>
-            </div>
-
-            <div class="project" data-key="motion" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/motion-thumb.jpg" alt="Motion portfolio">
-              <div class="project-info"><h3>Motion Portfolio</h3><p class="small" style="color:var(--muted)">Explainers & motion graphics</p></div>
-            </div>
-
-            <div class="project" data-key="reformist" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/reformist-thumb.jpg" alt="The Reformist">
-              <div class="project-info"><h3>The Reformist</h3><p class="small" style="color:var(--muted)">Podcast editing & clips</p></div>
-            </div>
-
-            <div class="project" data-key="wamen" tabindex="0" role="button" aria-pressed="false">
-              <img src="assets/wamen-thumb.jpg" alt="Wamenlu">
-              <div class="project-info"><h3>Arrmanatha Nasir — Wamenlu RI</h3><p class="small" style="color:var(--muted)">Strategic proposal & editorial system</p></div>
-            </div>
-          </div>
-        </section>
-
-        <section id="services" class="card reveal-up" style="margin-top:22px">
-          <h2 class="section-title">Services</h2>
-          <p class="lead">End-to-end production and strategic services — from deck → script → storyboard → motion → reporting.</p>
-
-          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
-            <span class="badge">Strategy & Pillars</span>
-            <span class="badge">Script & Storyboard</span>
-            <span class="badge">Production</span>
-            <span class="badge">Motion Design</span>
-            <span class="badge">Short-form Content</span>
-            <span class="badge">Reporting & Ads</span>
-          </div>
-        </section>
-
-        <section id="concept" class="card reveal-up" style="margin-top:22px">
-          <h2 class="section-title">Concept → Video</h2>
-          <p class="lead">I turn reports and decks into short explainers and social-first clips. I handle translation, scripting, storyboards, edit and final delivery tailored for platform performance.</p>
-        </section>
+        <div class="label" style="margin-bottom:var(--s2)">What I do</div>
+        <h2 class="h2">End-to-end, start to finish.</h2>
       </div>
-
-      <aside class="sidebar" aria-label="Sidebar">
-        <div class="meta-box reveal-up" role="region" aria-labelledby="bioTitle">
-          <h4 id="bioTitle">Quick Bio</h4>
-          <div class="small" style="color:var(--muted);margin-top:8px">Creative Digital Strategist & motion producer. I bridge strategy, visual storytelling and data to deliver measurable content systems.</div>
-
-          <div style="height:14px"></div>
-          <div class="small" style="color:var(--muted)"><strong>Email</strong><br>aldynurfebrian@gmail.com</div>
-
-          <div style="height:14px"></div>
-          <div class="small" style="color:var(--muted)"><strong>Selected links</strong><br>
-            <a href="https://www.instagram.com/jabardigitalservice/" target="_blank">@jabardigitalservice</a><br>
-            <a href="https://www.instagram.com/distanhortijabar/" target="_blank">@distanhortijabar</a><br>
-            <a href="https://www.youtube.com/playlist?list=PL-FVRVPz9BskxEh8O9llBPEhxislss7Zz" target="_blank">Motion playlist</a>
-          </div>
-        </div>
-
-        <div style="height:16px"></div>
-
-        <div class="meta-box reveal-up">
-          <h4>Quick facts</h4>
-          <div style="margin-top:8px" class="small" style="color:var(--muted)">150+ content pieces • Viral reels (1–3M views) • Experience with public institutions & corporate clients</div>
-        </div>
-      </aside>
     </div>
-
-    <footer>
-      <div class="small">© Aldy Febrian — Creative Digital Strategist</div>
-      <div class="small">Replace images in /assets for final polish</div>
-    </footer>
-  </div>
-
-  <!-- MODAL -->
-  <div id="modalWrap" class="modal-wrap" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal()">
-    <div id="modalCard" class="modal" role="document" aria-labelledby="modalTitle">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <div>
-          <h3 id="modalTitle">Project</h3>
-          <div id="modalSub" class="small" style="color:var(--muted);margin-top:6px"></div>
-        </div>
-        <div>
-          <button class="btn ghost" onclick="closeModal()">Close</button>
-        </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🎯</div>
+        <div class="service-title">Content Strategy</div>
+        <div class="service-desc">Brand positioning, content pillars, editorial systems, and performance frameworks built for real communication goals.</div>
+        <ul class="service-list">
+          <li>Audience & channel mapping</li>
+          <li>Content pillar design</li>
+          <li>Editorial calendar</li>
+          <li>Monthly performance reporting</li>
+        </ul>
       </div>
-
-      <div class="modal-grid" style="margin-top:14px">
-        <div>
-          <div class="modal-media" id="modalMedia">
-            <img id="modalMain" src="" alt="project image">
-          </div>
-          <div class="thumbs" id="modalThumbs" aria-hidden="false"></div>
-        </div>
-
-        <aside>
-          <div style="background:var(--panel);padding:12px;border-radius:10px">
-            <div id="modalDesc" style="color:var(--muted);font-size:15px"></div>
-            <div class="metrics" id="modalMetrics"></div>
-            <div style="margin-top:12px" id="modalLinks"></div>
-          </div>
-        </aside>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🎬</div>
+        <div class="service-title">Video & Motion</div>
+        <div class="service-desc">From concept to final cut — scripting, storyboarding, motion design, and editing tailored for every platform.</div>
+        <ul class="service-list">
+          <li>Script & storyboard</li>
+          <li>Motion graphics & explainers</li>
+          <li>Reels & short-form content</li>
+          <li>Shoot direction & editing</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">📊</div>
+        <div class="service-title">Campaign & Ads</div>
+        <div class="service-desc">Multi-channel campaigns combining organic strategy with Meta and Google Ads, optimised by data at every stage.</div>
+        <ul class="service-list">
+          <li>Campaign planning & phasing</li>
+          <li>Meta & Google Ads management</li>
+          <li>Performance analysis</li>
+          <li>Growth recommendations</li>
+        </ul>
       </div>
     </div>
   </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="label reveal" style="margin-bottom:var(--s2)">How I work</div>
+    <h2 class="h2 reveal reveal-delay-1">Structured thinking, creative execution.</h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">1</div>
+        <div class="process-step-title">Discover</div>
+        <div class="process-step-desc">Listen, research, understand what's really being asked</div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step-num">2</div>
+        <div class="process-step-title">Frame</div>
+        <div class="process-step-desc">Strategy, pillars, narrative direction</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num">3</div>
+        <div class="process-step-title">Create</div>
+        <div class="process-step-desc">Script, storyboard, design, motion</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step-num">4</div>
+        <div class="process-step-title">Distribute</div>
+        <div class="process-step-desc">Publish, boost, optimise across channels</div>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="process-step-num">5</div>
+        <div class="process-step-title">Reflect</div>
+        <div class="process-step-desc">Analyse, report, iterate for next cycle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="label" style="color:rgba(255,255,255,.3);margin-bottom:var(--s3)">Get in touch</div>
+      <h2 class="contact-title">Got something<br><em>complex to tell?</em></h2>
+      <p class="contact-desc">Let's talk about your project. I'm open to strategy, production, and everything in between.</p>
+      <div class="contact-links">
+        <a href="mailto:aldynurfebrian@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">aldynurfebrian@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://aldynf.github.io" target="_blank" class="contact-link">
+          <span class="contact-link-icon">🌐</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Portfolio</div>
+            <div class="contact-link-value">aldynf.github.io</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/playlist?list=PL-FVRVPz9BskxEh8O9llBPEhxislss7Zz" target="_blank" class="contact-link">
+          <span class="contact-link-icon">▶</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Motion portfolio</div>
+            <div class="contact-link-value">YouTube playlist</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="contact-fact">
+        <div class="contact-fact-num">3.2M</div>
+        <div class="contact-fact-label">Peak quarterly reach delivered for a public institution</div>
+      </div>
+      <div class="contact-fact" style="margin-top:var(--s2)">
+        <div class="contact-fact-num">12+</div>
+        <div class="contact-fact-label">Years working across broadcast, digital, and government</div>
+      </div>
+      <div class="contact-fact" style="margin-top:var(--s2)">
+        <div class="contact-fact-num">10+</div>
+        <div class="contact-fact-label">Organizations and clients worked with across sectors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Aldy Febrian</div>
+  <div class="footer-note">© 2025 · Creative Strategist · Cimahi, Indonesia</div>
+</footer>
+
+<!-- MODAL -->
+<div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modalBox">
+    <div class="modal-inner">
+      <div class="modal-media" id="modalMedia">
+        <div class="modal-media-placeholder" id="modalPlaceholder">AF</div>
+      </div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div>
+          <div class="label" id="modalCategory" style="margin-bottom:6px"></div>
+          <div class="modal-title" id="modalTitle"></div>
+          <div class="modal-sub" id="modalSub" style="margin-top:6px"></div>
+        </div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-metrics" id="modalMetrics"></div>
+        <div class="modal-links" id="modalLinks"></div>
+        <div class="modal-thumbs" id="modalThumbs"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-  const PROJECTS = {
-    jds: { title:'Jabar Digital Service — 2024 Performance', sub:'Strategist & creative lead — managed until Apr 2025', desc:'Brand persona, content pillars, high-impact reels. Full editorial system and reporting.', metrics:[{k:'Reach peak',v:'3.2M'},{k:'Followers',v:'+36K'},{k:'Engagement (Q3)',v:'357.7K'}], links:[{t:'Instagram',u:'https://www.instagram.com/jabardigitalservice/'},{t:'Q3 report',u:"Febri's Party 2024 [Q3].pdf"}], images:['assets/jds-1.jpg','assets/jds-2.jpg','assets/jds-thumb.jpg'] },
-    distan:{ title:'Distanhorti Jabar — 3-month campaign (2025)', sub:'Content strategist & production support', desc:'3-phase campaign: educational storytelling and reels; monthly reporting and optimizations.', metrics:[{k:'Total reach',v:'142,790'},{k:'Interactions',v:'20,035'},{k:'Followers',v:'+2,405'}], links:[{t:'Instagram',u:'https://www.instagram.com/distanhortijabar/'},{t:'Final report',u:'Laporan_ Campaign Media Sosial Instagram - Dinas Tanaman Pangan dan Holtikultura Jawa Barat 2025.pdf'}], images:['assets/distan-1.jpg','assets/distan-2.jpg','assets/distan-thumb.jpg'] },
-    biteship:{ title:'Biteship — Marketing Video', sub:'Creative Director — storyboard & full production', desc:'Concept, 22-page storyboard, shoot planning, and final video edits. Deliverables: 60s / 30s + 30 photos.', metrics:[{k:'Video outputs',v:'60s & 30s'},{k:'Photos delivered',v:'30'}], links:[{t:'Storyboard (PDF)',u:'Storyboard Photo Video Production_ Biteship.pdf'},{t:'Sample (Drive)',u:'https://drive.google.com/file/d/14BXxIfuj9El8kDkV0uZoGozpEINpiuXj/view?usp=sharing'}], images:['assets/biteship-1.jpg','assets/biteship-2.jpg','assets/biteship-thumb.jpg'] },
-    motion:{ title:'Motion Portfolio', sub:'Explainers & motion graphics', desc:'Explainer videos, motion infographics. Playlist linked in the footer.', metrics:[{k:'Top views',v:'1–3M'},{k:'Formats',v:'16:9 & 9:16'}], links:[{t:'YouTube playlist',u:'https://www.youtube.com/playlist?list=PL-FVRVPz9BskxEh8O9llBPEhxislss7Zz'}], images:['assets/motion-1.jpg','assets/motion-thumb.jpg'] },
-    reformist:{ title:'The Reformist — Podcast editing', sub:'Freelance editor & short-form producer', desc:'Full podcast edits and short-form clips for social', metrics:[{k:'Role',v:'Editor'},{k:'Formats',v:'Long-form + Shorts'}], links:[{t:'Channel',u:'https://www.youtube.com/@thereformistid'}], images:['assets/reformist-1.jpg','assets/reformist-thumb.jpg'] },
-    wamen:{ title:'Arrmanatha Nasir — Wamenlu RI', sub:'Lead strategist & creative director (proposal)', desc:'Editorial system and 4-month calendar for a diplomatic account. Tone & pillar design.', metrics:[{k:'Scope',v:'Editorial system'},{k:'Pillars',v:'Diplomacy, Human, Behind-the-Scene'}], links:[{t:'Brief (PDF)',u:'Social Media Management and Brief Note - Arrmanatha Nasir Wamenlu RI.pdf'}], images:['assets/wamen-1.jpg','assets/wamen-thumb.jpg'] }
-  };
+/* ---- cursor ---- */
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.project-card,.service-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('grow'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('grow'));
+});
 
-  // reveal / observe
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('visible','show'); obs.unobserve(e.target); }
-    })
-  },{threshold:0.12});
+/* ---- nav scroll ---- */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
 
-  document.querySelectorAll('.project').forEach(p=>{ obs.observe(p); p.addEventListener('click', ()=>openProject(p.dataset.key)); p.addEventListener('keydown', (ev)=>{ if(ev.key==='Enter' || ev.key===' ') openProject(p.dataset.key) }) });
-  document.querySelectorAll('.reveal-up').forEach(n=>obs.observe(n));
+/* ---- reveal ---- */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); revObs.unobserve(e.target); } });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-  // modal
-  const modalWrap = document.getElementById('modalWrap'), modalCard = document.getElementById('modalCard');
-  function openProject(key){
-    const data = PROJECTS[key]; if(!data) return;
-    document.getElementById('modalTitle').textContent = data.title;
-    document.getElementById('modalSub').textContent = data.sub;
-    document.getElementById('modalDesc').textContent = data.desc;
-
-    const metricsNode = document.getElementById('modalMetrics'); metricsNode.innerHTML='';
-    data.metrics.forEach(m=>{ const el = document.createElement('div'); el.className='metric'; el.innerHTML=`<strong>${m.v}</strong><div style="font-size:13px;color:var(--muted)">${m.k}</div>`; metricsNode.appendChild(el); });
-
-    const linksNode = document.getElementById('modalLinks'); linksNode.innerHTML='';
-    data.links.forEach(l=>{ const a = document.createElement('a'); a.href=l.u; a.target='_blank'; a.rel='noopener'; a.className='small'; a.textContent = l.t; a.style.display='block'; linksNode.appendChild(a); });
-
-    // images
-    const main = document.getElementById('modalMain'); main.src = data.images[0] || '';
-    const thumbs = document.getElementById('modalThumbs'); thumbs.innerHTML='';
-    data.images.forEach((img,idx)=>{ const t = document.createElement('img'); t.src=img; if(idx===0) t.classList.add('active'); t.onclick = ()=>{ document.querySelectorAll('#modalThumbs img').forEach(x=>x.classList.remove('active')); t.classList.add('active'); main.src=img; }; thumbs.appendChild(t); });
-
-    modalWrap.style.display='flex'; requestAnimationFrame(()=> modalCard.classList.add('open')); document.body.style.overflow='hidden';
+/* ---- projects data ---- */
+const PROJECTS = {
+  jds: {
+    category: 'Content Strategy · 2022–2025',
+    title: 'Jabar Digital Service — Performance Transformation',
+    sub: 'Content Strategist & Creative Lead',
+    desc: 'Led the full editorial and digital communication system for West Java\'s provincial digital agency. Designed content pillars, managed creative teams, produced motion assets, and drove measurable growth across Instagram and TikTok through data-informed strategy and quarterly reporting.',
+    metrics: [{v:'3.2M',k:'Reach peak (Q3)'},{v:'+36K',k:'Followers (2024)'},{v:'357K',k:'Engagement (Q3)'},{v:'150+',k:'Content pieces'}],
+    links: [{t:'@jabardigitalservice',u:'https://www.instagram.com/jabardigitalservice/'}],
+    images: ['assets/jds-1.jpg','assets/jds-2.jpg']
+  },
+  distan: {
+    category: 'Campaign · Sept–Nov 2025',
+    title: 'Distanhorti Jabar — 3-Month Campaign',
+    sub: 'Content Strategist & Production Support',
+    desc: 'End-to-end campaign for West Java\'s Department of Food Crops & Horticulture. Designed a three-phase content strategy (educational storytelling, reels, engagement), executed 9 strategic assets, and delivered monthly analytics reports with optimization recommendations.',
+    metrics: [{v:'142K',k:'Total reach'},{v:'20K',k:'Interactions'},{v:'+2,405',k:'New followers'},{v:'1.3M',k:'Total views'}],
+    links: [{t:'@distanhortijabar',u:'https://www.instagram.com/distanhortijabar/'}],
+    images: ['assets/distan-1.jpg','assets/distan-2.jpg']
+  },
+  biteship: {
+    category: 'Video Production · 2022',
+    title: 'Biteship — Marketing Video',
+    sub: 'Creative Director · Storyboard & Full Production',
+    desc: 'Full creative direction for a marketing video campaign for Biteship (PT Berbagi Inovasi Teknologi). Developed the concept, wrote a 22-page cinematic storyboard, managed the production crew, directed the shoot, and delivered final edits in 60s and 30s formats.',
+    metrics: [{v:'60s & 30s',k:'Video outputs'},{v:'30',k:'Edited photos'},{v:'22-pg',k:'Storyboard'}],
+    links: [{t:'View sample (Drive)',u:'https://drive.google.com/file/d/14BXxIfuj9El8kDkV0uZoGozpEINpiuXj/view?usp=sharing'}],
+    images: ['assets/biteship-1.jpg','assets/biteship-2.jpg']
+  },
+  dsw: {
+    category: 'Campaign · 2023',
+    title: 'Data Science Weekend × Telkomsel',
+    sub: 'Campaign Strategist & Analyst',
+    desc: 'Multi-channel national marketing campaign for Data Science Weekend 2023, with Telkomsel as primary sponsor. Led content phasing across Meta, Google, and Twitter with ATL/BTL/TTL integration. Managed funnel reporting from awareness through to ticket conversion.',
+    metrics: [{v:'1,857',k:'Registrants'},{v:'1,723',k:'Attendees'},{v:'1.4M',k:'Meta ads reach'}],
+    links: [],
+    images: ['assets/dsw-1.jpg','assets/dsw-2.jpg']
+  },
+  wamen: {
+    category: 'Strategic Proposal · 2025',
+    title: 'Arrmanatha Nasir — Deputy Foreign Minister of Indonesia',
+    sub: 'Lead Strategist & Creative Director',
+    desc: 'Developed a comprehensive social media strategy and editorial system for the Deputy Foreign Minister of Indonesia\'s personal Instagram account. Designed a diplomatic content framework, tone of voice, content pillars, 4-month calendar, and 15+ detailed content briefs — balancing protocol, diplomacy, and public engagement.',
+    metrics: [{v:'4-month',k:'Content calendar'},{v:'15+',k:'Content briefs'},{v:'4 pillars',k:'Editorial framework'}],
+    links: [],
+    images: ['assets/wamen-1.jpg','assets/wamen-2.jpg']
+  },
+  mott: {
+    category: 'Motion · Documentary · 2021 & 2023',
+    title: 'Mott MacDonald — Future Cities',
+    sub: 'Motion Producer & Narrative Director',
+    desc: 'Translated complex urban policy research into a documentary-style video for Mott MacDonald (UK-funded infrastructure consultancy). Took end-to-end ownership — from multiple client meetings to understand the research, through narrative scripting and motion graphics, to final delivery. One of the most personally meaningful projects in my career.',
+    metrics: [{v:'End-to-end',k:'Production ownership'},{v:'UK-funded',k:'Programme'},{v:'2× editions',k:'2021 & 2023'}],
+    links: [],
+    images: ['assets/mott-1.jpg','assets/mott-2.jpg']
+  },
+  dsi: {
+    category: 'Communication Leadership · 2022–2023',
+    title: 'Data Science Indonesia — Head of Communication',
+    sub: 'Head of Kompub Division',
+    desc: 'Led the Communication & Publication division of Data Science Indonesia — managing 10+ members across 3 creative squads. Built editorial SOPs, content pillars, and an agency-style workflow using Notion and Google Workspace. Grew the Instagram account by +10,000 followers organically within a year, while maintaining a consistent 2-post-per-week cadence.',
+    metrics: [{v:'+10K',k:'IG followers (1 year)'},{v:'10+',k:'Team members'},{v:'3',k:'Creative squads'}],
+    links: [],
+    images: ['assets/dsi-1.jpg','assets/dsi-2.jpg']
+  },
+  motion: {
+    category: 'Motion Design · 2019–2025',
+    title: 'Motion Portfolio — Explainers & Graphics',
+    sub: 'Motion Designer & Producer',
+    desc: 'A catalogue of motion work spanning government explainers, broadcast graphics, product videos, and social-first reels. Built across 6+ years and across multiple clients and platforms — from iNews TV broadcast packages to viral government reels reaching millions.',
+    metrics: [{v:'1–3M',k:'Peak views'},{v:'200+',k:'Assets delivered'},{v:'16:9 & 9:16',k:'Formats'}],
+    links: [{t:'View YouTube playlist',u:'https://www.youtube.com/playlist?list=PL-FVRVPz9BskxEh8O9llBPEhxislss7Zz'}],
+    images: ['assets/motion-1.jpg','assets/motion-2.jpg']
   }
-  function closeModal(){ modalCard.classList.remove('open'); setTimeout(()=>{ modalWrap.style.display='none'; document.body.style.overflow='auto'; }, 260); }
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+};
+
+/* ---- modal ---- */
+const overlay = document.getElementById('modalOverlay');
+const modalBox = document.getElementById('modalBox');
+
+function openModal(key) {
+  const d = PROJECTS[key]; if(!d) return;
+  document.getElementById('modalCategory').textContent = d.category;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalSub').textContent = d.sub;
+  document.getElementById('modalDesc').textContent = d.desc;
+
+  const met = document.getElementById('modalMetrics'); met.innerHTML = '';
+  d.metrics.forEach(m => {
+    const el = document.createElement('div'); el.className = 'modal-metric';
+    el.innerHTML = `<strong>${m.v}</strong><span>${m.k}</span>`;
+    met.appendChild(el);
+  });
+
+  const lnk = document.getElementById('modalLinks'); lnk.innerHTML = '';
+  d.links.forEach(l => {
+    const a = document.createElement('a'); a.href = l.u; a.target = '_blank'; a.rel = 'noopener';
+    a.className = 'modal-link'; a.textContent = l.t; lnk.appendChild(a);
+  });
+
+  // placeholder since no real images loaded
+  document.getElementById('modalPlaceholder').textContent = d.title.split('—')[0].trim().split(' ').map(w=>w[0]).join('').slice(0,3);
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card.dataset.key));
+  card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') openModal(card.dataset.key); });
+});
 </script>
 </body>
 </html>
